@@ -4,6 +4,9 @@ import { connect } from 'react-redux'
 import { writeStudentFirstName, writeStudentLastName, writeStudentEmail, writeStudentGPA, postStudent } from '../store'
 
 
+// Use this history prop
+
+
 // *** Questions
 // 1. Do I want my react-form to let a user know when the data they are inputting is invalid via model specifications?
 
@@ -17,7 +20,7 @@ function AllStudents (props) {
       <Router>
         <div>
           <h4>Students</h4>
-          <p>Please choose a student below to view additional details about that student.</p>
+          <p>Please choose a student below to <i>view additional details</i> or to <i>delete that student's record</i>.</p>
             <div>
               {
                 students.map(student => {
@@ -34,21 +37,21 @@ function AllStudents (props) {
             <form onSubmit={handleSubmit}>
               <div className="row">
                 <div className="col-md-3">
-                  <label for="studentFirstName">Student first name</label>
+                  <label htmlFor="studentFirstName">Student first name</label>
                   <input type="text" className="form-control" name="studentFirstName" placeholder="Enter student first name" value={newStudentFirstName} onChange={handleFirstNameChange} />
                 </div>
                 <div className="col-md-3">
-                  <label for="studentLastName">Student last name</label>
+                  <label htmlFor="studentLastName">Student last name</label>
                   <input type="text" className="form-control" name="studentLastName" placeholder="Enter student last name" value={newStudentLastName} onChange={handleLastNameChange} />
                 </div>
               </div>
               <div className="row">
                 <div className="col-md-3">
-                  <label for="studentEmail">Student email</label>
+                  <label htmlFor="studentEmail">Student email</label>
                   <input type="text" className="form-control" name="studentEmail" placeholder="Enter student email" value={newStudentEmail} onChange={handleEmailChange} />
                 </div>
                 <div className="col-md-3">
-                  <label for="studentEmail">Student gpa</label>
+                  <label htmlFor="studentEmail">Student gpa</label>
                   <input type="text" className="form-control" name="studentGPA" placeholder="Enter student GPA" value={newStudentGPA} onChange={handleGPAChange} />
                 </div>
               </div>
@@ -56,7 +59,7 @@ function AllStudents (props) {
                 <button type="submit" className="btn btn-primary">Add Student</button>
               </div>
             </form>
-        </div>
+          </div>
         </div>
       </Router>
     </div>

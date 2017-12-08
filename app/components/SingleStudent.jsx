@@ -26,51 +26,39 @@ class SingleStudent extends Component {
           <div>First Name: { student.firstName }</div>
           <div>Email: { student.email }</div>
           <div>GPA: { student.gpa }</div>
-          <div>Campus: { student.gpa }</div>
         </div>
-        <div>
-          <h5>Edit this student's record</h5>
-
+        <div className="add">
+        <h5>Edit this student's record</h5>
           <form onSubmit={handleSubmit}>
-            <div>
-              <input
-                type="text"
-                name="studentFirstName"
-                placeholder="Update student's first name..."
-                value={updatedFirstName}
-                onChange={handleFirstNameChange}
-              />
-              <input
-                type="text"
-                name="studentLastName"
-                placeholder="Update student's last name..."
-                value={updatedLastName}
-                onChange={handleLastNameChange}
-              />
-              <input
-                type="text"
-                name="studentEmail"
-                placeholder="Update student's email..."
-                value={updatedEmail}
-                onChange={handleEmailChange}
-              />
-              <input
-                type="text"
-                name="studentGPA"
-                placeholder="Update student's gpa..."
-                value={updatedGPA}
-                onChange={handleGPAChange}
-              />
-              <span>
-              <button type="submit">Submit Updates</button>
-              </span>
+            <div className="row">
+              <div className="col-md-3">
+                <label htmlFor="studentFirstName">Student first name</label>
+                <input type="text" className="form-control" name="studentFirstName" placeholder="Update student's first name" value={updatedFirstName} onChange={handleFirstNameChange} />
+              </div>
+              <div className="col-md-3">
+                <label htmlFor="studentLastName">Student last name</label>
+                <input type="text" className="form-control" name="studentLastName" placeholder="Update student's last name" value={updatedLastName} onChange={handleLastNameChange} />
+              </div>
+            </div>
+            <div className="row">
+              <div className="col-md-3">
+                <label htmlFor="studentEmail">Student email</label>
+                <input type="text" className="form-control" name="studentEmail" placeholder="Update student's email" value={updatedEmail} onChange={handleEmailChange} />
+              </div>
+              <div className="col-md-3">
+                <label htmlFor="studentGPA">Student GPA</label>
+                <input type="text" className="form-control" name="studentGPA" placeholder="Update student's gpa" value={updatedGPA} onChange={handleGPAChange} />
+              </div>
+            </div>
+            <div id="button">
+              <button type="submit" className="btn btn-primary">Submit Updates</button>
             </div>
           </form>
         </div>
-        <h5>Delete this student</h5>
-          <form>
-            <input type="button" value="Delete Campus" onClick={(event) => onClick(student, student.id)} />
-          </form>
+        <h5 className="add">Delete this student</h5>
+          <div id="button">
+            <input type="button" value="Delete Student" className="btn btn-primary" onClick={(event) => onClick(student, student.id)} />
+          </div>
       </div>
     )
   }

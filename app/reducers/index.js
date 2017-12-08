@@ -44,7 +44,7 @@ const UPDATE_STUDENT_LASTNAME = 'UPDATE_STUDENT_LASTNAME'
 const UPDATE_STUDENT_EMAIL = 'UPDATE_STUDENT_EMAIL'
 const UPDATE_STUDENT_GPA = 'UPDATE_STUDENT_GPA'
 const CREATE_STUDENT = 'CREATE_STUDENT'
-const EDIT_STUDENT = 'EDIT_CAMPUS'
+const EDIT_STUDENT = 'EDIT_STUDENT'
 const DELETE_STUDENT = 'DELETE_STUDENT'
 
 const rootReducer = function(state = initialState, action) {
@@ -83,6 +83,7 @@ const rootReducer = function(state = initialState, action) {
       })
     case EDIT_CAMPUS:
       return Object.assign({}, state, {
+        campus: action.campus,
         campuses: [...state.campuses.filter(campus => campus.id !== action.campus.id), action.campus]
       })
     case DELETE_CAMPUS:
@@ -135,6 +136,7 @@ const rootReducer = function(state = initialState, action) {
       })
     case EDIT_STUDENT:
       return Object.assign({}, state, {
+        student: action.student,
         students: [...state.students.filter(student => student.id !== action.student.id), action.student]
       })
     case DELETE_STUDENT:

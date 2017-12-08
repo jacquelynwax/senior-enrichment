@@ -48,7 +48,7 @@ const UPDATE_STUDENT_LASTNAME = 'UPDATE_STUDENT_LASTNAME'
 const UPDATE_STUDENT_EMAIL = 'UPDATE_STUDENT_EMAIL'
 const UPDATE_STUDENT_GPA = 'UPDATE_STUDENT_GPA'
 const CREATE_STUDENT = 'CREATE_STUDENT'
-const EDIT_STUDENT = 'EDIT_CAMPUS'
+const EDIT_STUDENT = 'EDIT_STUDENT'
 const DELETE_STUDENT = 'DELETE_STUDENT'
 
 // action creators
@@ -202,7 +202,6 @@ export function updateStudentLastName (updatedStudentLastName) {
     type: UPDATE_STUDENT_LASTNAME,
     updatedStudentLastName
   }
-  console.log('!!!!action in action creator', action)
   return action
 }
 
@@ -227,6 +226,7 @@ export function editStudent (student) {
     type: EDIT_STUDENT,
     student
   }
+  return action
 }
 
 export function deleteStudent (student) {
@@ -234,6 +234,7 @@ export function deleteStudent (student) {
     type: DELETE_STUDENT,
     student
   }
+  return action
 }
 
 // thunk creators
@@ -287,7 +288,7 @@ export function updateCampus (campus, campusId) {
     axios.put(`api/campuses/${campusId}`, campus)
       .then(res => res.data)
       .then(updatedCampus => {
-        const action = editCampus(updatedCampus[1][0])
+        const action = editCampus(updatedCampus)
         dispatch(action)
       })
   }
@@ -341,17 +342,20 @@ export function updateStudent (student, studentId) {
     axios.put(`api/students/${studentId}`, student)
       .then(res => res.data)
       .then(updatedStudent => {
-        const action = editStudent(updatedStudent[1][0])
+        console.log('updated student in thunk after backend request', updatedStudent)
+        const action = editStudent(updatedStudent)
         dispatch(action)
       })
   }
 }
 
-export function destoryStudent (student) {
+export function destroyStudent (student, studentId) {
   return function thunk (dispatch) {
-    axios.delete(`api/students/${student.id}`, student)
-      .then(res => res.data)
-      // I don't think delete actually returns the deleted campus, so not sure how to dispatch an action here?
+    axios.delete(`api/students/${studentId}`, student)
+    .then(() => {
+      const action = deleteStudent(student)
+      dispatch(action)
+    })
   }
 }
 

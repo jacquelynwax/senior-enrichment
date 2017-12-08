@@ -13,7 +13,7 @@ function AllCampuses (props) {
       <Router>
         <div>
           <h4>Campuses</h4>
-          <p>Please choose a campus below to view additional details about that campus.</p>
+          <p>Please choose a campus below to <i>view additional details</i> or to <i>delete</i> that campus.</p>
           <div>
             {
               campuses.map(campus => {
@@ -29,11 +29,11 @@ function AllCampuses (props) {
           <h5>Add a new campus</h5>
           <form onSubmit={handleSubmit}>
             <div className="form-group">
-              <label for="campusName">Campus name</label>
+              <label htmlFor="campusName">Campus name</label>
               <input type="text" className="form-control" name="campusName" placeholder="Enter campus name" value={newCampusName} onChange={handleNameChange} />
             </div>
             <div className="form-group">
-              <label for="campusDescription">Campus description</label>
+              <label htmlFor="campusDescription">Campus description</label>
               <textarea className="form-control" rows="3" name="campusDescription" placeholder="Enter campus description" value={newCampusDescription} onChange={handleDescriptionChange} />
             </div>
             <div className="form-group">
