@@ -20,10 +20,9 @@ class SingleCampus extends Component {
 
     return (
       <div>
-        <h3>Welcome to the Single Campus page.</h3>
         <h4>{campus.name}</h4>
-        <h4>{campus.description}</h4>
-        <h3>Students</h3>
+        <p>{campus.description}</p>
+        <h5>Students</h5>
           <div>
             {
               students.map(student => {
@@ -35,32 +34,28 @@ class SingleCampus extends Component {
               })
             }
           </div>
-        <h3>Update this campus</h3>
+          <div className="add">
+          <h5>Make changes to this campus</h5>
           <form onSubmit={handleSubmit}>
-            <div>
-              <input
-                type="text"
-                name="campusName"
-                placeholder="Update campus name..."
-                value={updatedCampusName}
-                onChange={handleNameChange}
-              />
-              <input
-                type="text"
-                name="campusDescription"
-                placeholder="Update campus description..."
-                value={updatedCampusDescription}
-                onChange={handleDescriptionChange}
-              />
-              <span>
-              <button type="submit">Submit Updates</button>
-              </span>
+            <div className="form-group">
+              <label for="campusName">Campus name</label>
+              <input type="text" className="form-control" name="campusName" placeholder="Update campus name" value={updatedCampusName} onChange={handleNameChange} />
+            </div>
+            <div className="form-group">
+              <label for="campusName">Campus description</label>
+              <textarea className="form-control" rows="3" name="campusDescription" placeholder="Update campus description" value={updatedCampusDescription} onChange={handleDescriptionChange} />
+            </div>
+            <div className="form-group">
+              <div id="button">
+                <button type="submit" className="btn btn-primary">Submit Updates</button>
+              </div>
             </div>
           </form>
-        <h3>Delete this campus</h3>
-          <form>
-            <input type="button" value="Delete Campus" onClick={(event) => onClick(campus, campus.id)} />
-          </form>
+        <h5 className="add">Delete this campus</h5>
+          <div id="button">
+            <input type="button" value="Delete Campus" className="btn btn-primary" onClick={(event) => onClick(campus, campus.id)} />
+          </div>
+        </div>
       </div>
     )
   }

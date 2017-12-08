@@ -19,7 +19,7 @@ export default class Root extends Component {
   render () {
     return (
       <Router>
-        <div>
+        <div className="container-fluid">
           <p>Check out <Link to="/campuses">Campuses</Link> or <Link to="/students">Students</Link>. Or go back <Link to="/">Home.</Link></p>
           <Switch>
               <Route path="/campuses" component={ Campuses } />

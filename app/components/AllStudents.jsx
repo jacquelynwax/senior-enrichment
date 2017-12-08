@@ -7,8 +7,6 @@ import { writeStudentFirstName, writeStudentLastName, writeStudentEmail, writeSt
 // *** Questions
 // 1. Do I want my react-form to let a user know when the data they are inputting is invalid via model specifications?
 
-// *** Functionality Notes for Me
-// 1. User should be able to create a student
 
 function AllStudents (props) {
 
@@ -18,7 +16,8 @@ function AllStudents (props) {
     <div>
       <Router>
         <div>
-          <h3>Welcome to the Students page. Please choose a student below.</h3>
+          <h4>Students</h4>
+          <p>Please choose a student below to view additional details about that student.</p>
             <div>
               {
                 students.map(student => {
@@ -30,42 +29,34 @@ function AllStudents (props) {
                 })
               }
             </div>
-            <h3>Add a new student.</h3>
+            <div className="add">
+            <h5>Add a new student</h5>
             <form onSubmit={handleSubmit}>
-              <div>
-                <input
-                  type="text"
-                  name="studentFirstName"
-                  placeholder="Student first name..."
-                  value={newStudentFirstName}
-                  onChange={handleFirstNameChange}
-                />
-                <input
-                  type="text"
-                  name="studentLastName"
-                  placeholder="Student last name..."
-                  value={newStudentLastName}
-                  onChange={handleLastNameChange}
-                />
-                <input
-                  type="text"
-                  name="studentEmail"
-                  placeholder="Student email..."
-                  value={newStudentEmail}
-                  onChange={handleEmailChange}
-                />
-                <input
-                  type="text"
-                  name="studentGPA"
-                  placeholder="Student GPA..."
-                  value={newStudentGPA}
-                  onChange={handleGPAChange}
-                />
-                <span>
-                <button type="submit">Submit New Student</button>
-                </span>
+              <div className="row">
+                <div className="col-md-3">
+                  <label for="studentFirstName">Student first name</label>
+                  <input type="text" className="form-control" name="studentFirstName" placeholder="Enter student first name" value={newStudentFirstName} onChange={handleFirstNameChange} />
+                </div>
+                <div className="col-md-3">
+                  <label for="studentLastName">Student last name</label>
+                  <input type="text" className="form-control" name="studentLastName" placeholder="Enter student last name" value={newStudentLastName} onChange={handleLastNameChange} />
+                </div>
+              </div>
+              <div className="row">
+                <div className="col-md-3">
+                  <label for="studentEmail">Student email</label>
+                  <input type="text" className="form-control" name="studentEmail" placeholder="Enter student email" value={newStudentEmail} onChange={handleEmailChange} />
+                </div>
+                <div className="col-md-3">
+                  <label for="studentEmail">Student gpa</label>
+                  <input type="text" className="form-control" name="studentGPA" placeholder="Enter student GPA" value={newStudentGPA} onChange={handleGPAChange} />
+                </div>
+              </div>
+              <div id="button">
+                <button type="submit" className="btn btn-primary">Add Student</button>
               </div>
             </form>
+        </div>
         </div>
       </Router>
     </div>
@@ -110,10 +101,10 @@ const mapDispatchToProps = function(dispatch, ownProps) {
       const gpa = event.target.studentGPA.value
       const action = postStudent({ firstName, lastName, email, gpa })
       dispatch(action)
-      // dispatch(writeStudentFirstName(''))
-      // dispatch(writeStudentLastName(''))
-      // dispatch(writeStudentEmail(''))
-      // dispatch(writeStudentGPA(''))
+      dispatch(writeStudentFirstName(''))
+      dispatch(writeStudentLastName(''))
+      dispatch(writeStudentEmail(''))
+      dispatch(writeStudentGPA(''))
     }
   }
 }

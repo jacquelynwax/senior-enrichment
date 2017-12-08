@@ -3,16 +3,10 @@ const { db, Campus, Student } = require('./server/models')
 // const Student = require('./server/models/student')
 
 const campuses = [
-  { name: 'Mercury', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris rutrum malesuada purus vitae mollis. Vestibulum id viverra enim, tempor bibendum mauris.' },
-  { name: 'Venus', description: 'Quisque elit arcu, vulputate eget pharetra id, pharetra vitae magna. Suspendisse potenti. Integer eleifend lorem eget egestas dictum.' },
-  { name: 'Earth', description: 'Quisque eget diam et magna placerat consectetur. Nulla facilisi.' },
-  { name: 'Mars', description: 'Nunc ut nulla tincidunt quam vehicula porttitor. Praesent maximus quam lobortis tristique dictum.' },
-  { name: 'Jupiter', description: 'Ut lobortis efficitur lectus, vel porta nibh pharetra in. Suspendisse ac dapibus quam.' },
-  { name: 'Saturn', description: 'Fusce sit amet ipsum feugiat, pellentesque purus nec, suscipit lorem.' },
-  { name: 'Uranus', description: 'Praesent at pellentesque metus, ac finibus neque. Ut pellentesque eget risus id fringilla.' },
-  { name: 'Neptune', description: 'Suspendisse sagittis lorem eget sapien dapibus, et vestibulum turpis auctor.' },
-  { name: 'Pluto', description: 'Cras lacinia dapibus urna, in bibendum nulla semper facilisis.' },
-  { name: 'Stars', description: 'Neque porro quisquam est qui dolorem ipsum quia dolor sit amet, consectetur, adipisci velit.' }
+  { name: 'Wonder Woman School for Remarkable Women', description: 'Lorem ipsum dolor sit amet, consectetur adipiscing elit. Mauris rutrum malesuada purus vitae mollis. Vestibulum id viverra enim, tempor bibendum mauris.' },
+  { name: 'Catwoman Charter Academy', description: 'Quisque elit arcu, vulputate eget pharetra id, pharetra vitae magna. Suspendisse potenti. Integer eleifend lorem eget egestas dictum.' },
+  { name: 'Captain Marvel Conservatory', description: 'Quisque eget diam et magna placerat consectetur. Nulla facilisi.' },
+  { name: 'Supergirl Institute of Superpower', description: 'Nunc ut nulla tincidunt quam vehicula porttitor. Praesent maximus quam lobortis tristique dictum.' }
 ]
 
 const students = [{
@@ -68,13 +62,13 @@ const students = [{
   lastName: 'Rivera',
   email: 'or91@gmail.com',
   gpa: 3.8,
-  campusId: 5
+  campusId: 4
 }, {
   firstName: 'Sara Rose',
   lastName: 'Gallagher',
   email: 'sg12@gmail.com',
   gpa: 3.9,
-  campusId: 5
+  campusId: 4
 }];
 //
 // const id = () => Math.round(Math.random() * (authors.length - 1)) + 1;

@@ -5,3 +5,15 @@
 body {
   font-family: arial,sans-serif;
 }
+
+#main {
+  padding-top: 1%;
+}
+
+.add {
+  padding-top: 1.5%;
+}
+
+#button {
+  padding-top: .5%;
+}

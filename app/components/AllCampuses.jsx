@@ -12,7 +12,8 @@ function AllCampuses (props) {
     <div>
       <Router>
         <div>
-          <h3>Welcome to the Campuses page. Please choose a campus below to view additional details about that campus.</h3>
+          <h4>Campuses</h4>
+          <p>Please choose a campus below to view additional details about that campus.</p>
           <div>
             {
               campuses.map(campus => {
@@ -24,28 +25,24 @@ function AllCampuses (props) {
               })
             }
           </div>
-          <h3>Add a new campus</h3>
+          <div className="add">
+          <h5>Add a new campus</h5>
           <form onSubmit={handleSubmit}>
-            <div>
-              <input
-                type="text"
-                name="campusName"
-                placeholder="Campus name..."
-                value={newCampusName}
-                onChange={handleNameChange}
-              />
-              <input
-                type="text"
-                name="campusDescription"
-                placeholder="Campus description..."
-                value={newCampusDescription}
-                onChange={handleDescriptionChange}
-              />
-              <span>
-              <button type="submit">Submit New Campus</button>
-              </span>
+            <div className="form-group">
+              <label for="campusName">Campus name</label>
+              <input type="text" className="form-control" name="campusName" placeholder="Enter campus name" value={newCampusName} onChange={handleNameChange} />
+            </div>
+            <div className="form-group">
+              <label for="campusDescription">Campus description</label>
+              <textarea className="form-control" rows="3" name="campusDescription" placeholder="Enter campus description" value={newCampusDescription} onChange={handleDescriptionChange} />
+            </div>
+            <div className="form-group">
+              <div id="button">
+                <button type="submit" className="btn btn-primary">Add Campus</button>
+              </div>
             </div>
           </form>
+          </div>
         </div>
       </Router>
     </div>
