@@ -93,9 +93,10 @@ const mapDispatchToProps = function (dispatch, ownProps) {
       dispatch(updateCampusDescription(''))
     },
     // deleting campus from both backend and state on button onClick
-    onClick (campus, campusId, props) {
+    onClick (campus, campusId) {
       const action = destroyCampus(campus, campusId)
       dispatch(action)
+      ownProps.history.push('/campuses')
     }
   }
 }

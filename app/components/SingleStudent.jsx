@@ -16,7 +16,7 @@ class SingleStudent extends Component {
 
   render () {
 
-    const { student, updatedFirstName, updatedLastName, updatedEmail, updatedGPA, handleFirstNameChange, handleLastNameChange, handleEmailChange, handleGPAChange, handleSubmit, onClick } = this.props
+    const { student, campuses, updatedFirstName, updatedLastName, updatedEmail, updatedGPA, handleFirstNameChange, handleLastNameChange, handleEmailChange, handleGPAChange, handleSubmit, onClick } = this.props
 
     return (
       <div>
@@ -109,6 +109,7 @@ const mapDispatchToProps = function (dispatch, ownProps) {
     onClick (student, studentId) {
       const action = destroyStudent(student, studentId)
       dispatch(action)
+      ownProps.history.push('/students')
     }
   }
 }

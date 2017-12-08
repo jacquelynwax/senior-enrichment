@@ -22,8 +22,8 @@ export default class Root extends Component {
         <div className="container-fluid">
           <p>Check out <Link to="/campuses">Campuses</Link> or <Link to="/students">Students</Link>. Or go back <Link to="/">Home.</Link></p>
           <Switch>
-              <Route path="/campuses" component={ Campuses } />
-              <Route path="/students" component={ Students } />
+            <Route path="/campuses" component={ Campuses } />
+            <Route path="/students" component={ Students } />
           </Switch>
         </div>
       </Router>

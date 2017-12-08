@@ -16,6 +16,7 @@ const initialState = {
   updatedCampusDescription: '',
   students: [],
   student: {},
+  studentCampus: {},
   newStudentFirstName: '',
   newStudentLastName: '',
   newStudentEmail: '',
