@@ -3,16 +3,9 @@ import { HashRouter as Router, Route, Link, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
 import { writeStudentFirstName, writeStudentLastName, writeStudentEmail, writeStudentGPA, postStudent } from '../store'
 
-
-// Use this history prop
-
-
-// *** Questions
-// 1. Do I want my react-form to let a user know when the data they are inputting is invalid via model specifications?
-
-
 function AllStudents (props) {
 
+  console.log(props)
   const { students, newStudentFirstName, newStudentLastName, newStudentEmail, newStudentGPA, handleFirstNameChange, handleLastNameChange, handleEmailChange, handleGPAChange, handleSubmit } = props
 
   return (

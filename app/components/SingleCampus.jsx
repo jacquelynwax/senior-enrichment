@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
 import { HashRouter as Router, Route, Link, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
+import AddStudentForm from './AddStudentForm'
 import store, { fetchCampus, fetchStudentsAtCampus, updateCampusName, updateCampusDescription, updateCampus, destroyCampus } from '../store'
 
 
@@ -35,6 +36,9 @@ class SingleCampus extends Component {
             }
           </div>
           <div className="add">
+          <h5>Add a new student to this campus</h5>
+          <AddStudentForm campusId={ campus.id }/>
+          <br/>
           <h5>Make changes to this campus</h5>
           <form onSubmit={handleSubmit}>
             <div className="form-group">

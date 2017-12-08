@@ -116,6 +116,7 @@ const rootReducer = function(state = initialState, action) {
       })
     case CREATE_STUDENT:
       return Object.assign({}, state, {
+        studentsAtCampus: [...state.studentsAtCampus, action.student],
         students: [...state.students, action.student]
       })
     case UPDATE_STUDENT_FIRSTNAME:
