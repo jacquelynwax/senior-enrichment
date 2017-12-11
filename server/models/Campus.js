@@ -6,9 +6,6 @@ const Campus = db.define('campuses', {
     type: Sequelize.STRING,
     allowNull: false
   },
-  // imageUrl: {
-  //   defaultValue: // Not sure yet what to put here?
-  // },
   description: Sequelize.TEXT
 })
 

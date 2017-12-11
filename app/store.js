@@ -4,30 +4,7 @@ import thunkMiddleware from 'redux-thunk'
 import axios from 'axios'
 import rootReducer from './reducers'
 
-
-// initial state
-const initialState = {
-  campuses: [],
-  campus: {},
-  studentsAtCampus: [],
-  newCampusName: '',
-  newCampusDescription: '',
-  updatedCampusName: '',
-  updatedCampusDescription: '',
-  students: [],
-  student: {},
-  studentCampus: {},
-  newStudentFirstName: '',
-  newStudentLastName: '',
-  newStudentEmail: '',
-  newStudentGPA: '',
-  updatedStudentFirstName: '',
-  updatedStudentLastName: '',
-  updatedStudentEmail: '',
-  updatedStudentGPA: ''
-}
-
-// actions
+// *** list of actions
 const GET_CAMPUSES = 'GET_CAMPUSES'
 const GET_CAMPUS = 'GET_CAMPUS'
 const GET_STUDENTS_AT_CAMPUS = 'GET_STUDENTS_AT_CAMPUS'
@@ -44,16 +21,17 @@ const WRITE_STUDENT_FIRSTNAME = 'WRITE_STUDENT_FIRSTNAME'
 const WRITE_STUDENT_LASTNAME = 'WRITE_STUDENT_LASTNAME'
 const WRITE_STUDENT_EMAIL = 'WRITE_STUDENT_EMAIL'
 const WRITE_STUDENT_GPA = 'WRITE_STUDENT_GPA'
+const WRITE_STUDENT_CAMPUS = 'WRITE_STUDENT_CAMPUS'
 const UPDATE_STUDENT_FIRSTNAME = 'UPDATE_STUDENT_FIRSTNAME'
 const UPDATE_STUDENT_LASTNAME = 'UPDATE_STUDENT_LASTNAME'
 const UPDATE_STUDENT_EMAIL = 'UPDATE_STUDENT_EMAIL'
 const UPDATE_STUDENT_GPA = 'UPDATE_STUDENT_GPA'
+const UPDATE_STUDENT_CAMPUS = 'UPDATE_STUDENT_CAMPUS'
 const CREATE_STUDENT = 'CREATE_STUDENT'
 const EDIT_STUDENT = 'EDIT_STUDENT'
 const DELETE_STUDENT = 'DELETE_STUDENT'
 
-// action creators
-// *** action creators return objects whose type represents an action string defined above and whose other properties will ultimately be used in the reducer function to update the value of state if and only if the action type occurs
+// *** action creators
 export function getCampuses (campuses) {
   const action = {
     type: GET_CAMPUSES,
@@ -182,6 +160,14 @@ export function writeStudentGPA (newStudentGPA) {
   return action
 }
 
+export function writeStudentCampus (newStudentCampus) {
+  const action = {
+    type: WRITE_STUDENT_CAMPUS,
+    newStudentCampus
+  }
+  return action
+}
+
 export function createStudent (student) {
   const action = {
     type: CREATE_STUDENT,
@@ -222,6 +208,14 @@ export function updateStudentGPA (updatedStudentGPA) {
   return action
 }
 
+export function updateStudentCampus (updatedStudentCampus) {
+  const action = {
+    type: UPDATE_STUDENT_CAMPUS,
+    updatedStudentCampus
+  }
+  return action
+}
+
 export function editStudent (student) {
   const action = {
     type: EDIT_STUDENT,
@@ -238,8 +232,7 @@ export function deleteStudent (student) {
   return action
 }
 
-// thunk creators
-// *** thunk creators return functions that invoke asynchronous actions (in this case, getting data from the database) and then dispatch actions based on the data returned, updated state with that data returned
+// *** thunk creators
 export function fetchCampuses () {
   return function thunk (dispatch) {
     axios.get('api/campuses')
@@ -343,7 +336,6 @@ export function updateStudent (student, studentId) {
     axios.put(`api/students/${studentId}`, student)
       .then(res => res.data)
       .then(updatedStudent => {
-        console.log('updated student in thunk after backend request', updatedStudent)
         const action = editStudent(updatedStudent)
         dispatch(action)
       })

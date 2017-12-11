@@ -27,13 +27,6 @@ const Student = db.define('students', {
       }
     }
   }
-  // name: {
-  //   type: Sequelize.VIRTUAL,
-  //   get () {
-  //     return this.firstName + ' ' + this.lastName
-  //   }
-  //   // If the above fails, try this from Tom's Sequelize notes: return this.getDataValue('firstName') + ' ' + this.getDataValue('lastName')
-  // }
 })
 
 module.exports = Student

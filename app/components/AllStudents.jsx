@@ -1,12 +1,11 @@
 import React, { Component } from 'react'
 import { HashRouter as Router, Route, Link, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import { writeStudentFirstName, writeStudentLastName, writeStudentEmail, writeStudentGPA, postStudent } from '../store'
+import { writeStudentFirstName, writeStudentLastName, writeStudentEmail, writeStudentGPA, writeStudentCampus, postStudent } from '../store'
 
 function AllStudents (props) {
 
-  console.log(props)
-  const { students, newStudentFirstName, newStudentLastName, newStudentEmail, newStudentGPA, handleFirstNameChange, handleLastNameChange, handleEmailChange, handleGPAChange, handleSubmit } = props
+  const { students, campuses, newStudentFirstName, newStudentLastName, newStudentEmail, newStudentGPA, newStudentCampus, handleFirstNameChange, handleLastNameChange, handleEmailChange, handleGPAChange, handleCampusChange, handleSubmit } = props
 
   return (
     <div>
@@ -48,10 +47,25 @@ function AllStudents (props) {
                   <input type="text" className="form-control" name="studentGPA" placeholder="Enter student GPA" value={newStudentGPA} onChange={handleGPAChange} />
                 </div>
               </div>
+              <div className="row">
+                <div className="col-md-6">
+                  <label htmlFor="campus">Choose a campus</label>
+                    <select name="studentCampus" value={newStudentCampus} onChange={handleCampusChange} className="form-control">
+                      {
+                        campuses.map(campus => {
+                          return <option key={ campus.id } value={ campus.id }>{ campus.name }</option>
+                        })
+                      }
+                    </select>
+                </div>
+              </div>
               <div id="button">
                 <button type="submit" className="btn btn-primary">Add Student</button>
               </div>
             </form>
+
+
+
           </div>
         </div>
       </Router>
@@ -63,10 +77,12 @@ function AllStudents (props) {
 const mapStateToProps = function(state, ownProps) {
   return {
     students: state.students,
+    campuses: state.campuses,
     newStudentFirstName: state.newStudentFirstName,
     newStudentLastName: state.newStudentLastName,
     newStudentEmail: state.newStudentEmail,
-    newStudentGPA: state.newStudentGPA
+    newStudentGPA: state.newStudentGPA,
+    newStudentCampus: state.newStudentCampus
   }
 }
 
@@ -88,6 +104,10 @@ const mapDispatchToProps = function(dispatch, ownProps) {
       const action = writeStudentGPA(event.target.value)
       dispatch(action)
     },
+    handleCampusChange (event) {
+      const action = writeStudentCampus(event.target.value) // create this action, action creator, and field on intialstate
+      dispatch(action)
+    },
     // updating both the backend and state with a newly created campus onSubmit and clearing input fields
     handleSubmit (event) {
       event.preventDefault()
@@ -95,7 +115,8 @@ const mapDispatchToProps = function(dispatch, ownProps) {
       const lastName = event.target.studentLastName.value
       const email = event.target.studentEmail.value
       const gpa = event.target.studentGPA.value
-      const action = postStudent({ firstName, lastName, email, gpa })
+      const campusId = event.target.studentCampus.value // need to get Id from campusesarray using this
+      const action = postStudent({ firstName, lastName, email, gpa, campusId })
       dispatch(action)
       dispatch(writeStudentFirstName(''))
       dispatch(writeStudentLastName(''))

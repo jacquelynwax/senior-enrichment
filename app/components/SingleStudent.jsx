@@ -1,22 +1,19 @@
 import React, { Component } from 'react'
 import { HashRouter as Router, Route, Link, withRouter } from 'react-router-dom'
 import { connect } from 'react-redux'
-import store, { fetchStudent, fetchCampus, updateStudentFirstName, updateStudentLastName, updateStudentEmail, updateStudentGPA, updateStudent, destroyStudent } from '../store'
+import store, { fetchStudent, fetchCampus, updateStudentFirstName, updateStudentLastName, updateStudentEmail, updateStudentGPA, updateStudentCampus, updateStudent, destroyStudent } from '../store'
 
-// *** Need to be able to add student's campus
 // *** Would be nice to be able to sort the list by alphabetical last name
 // *** Improve edit so that you can edit each field
 
 class SingleStudent extends Component {
-
   componentDidMount () {
     const studentThunk = fetchStudent(this.props.match.params.studentId)
     store.dispatch(studentThunk)
   }
 
   render () {
-
-    const { student, campuses, updatedFirstName, updatedLastName, updatedEmail, updatedGPA, handleFirstNameChange, handleLastNameChange, handleEmailChange, handleGPAChange, handleSubmit, onClick } = this.props
+    const { student, campuses, updatedFirstName, updatedLastName, updatedEmail, updatedGPA, updatedCampus, handleFirstNameChange, handleLastNameChange, handleEmailChange, handleGPAChange, handleCampusChange, handleSubmit, onClick } = this.props
 
     return (
       <div>
@@ -50,6 +47,18 @@ class SingleStudent extends Component {
                 <input type="text" className="form-control" name="studentGPA" placeholder="Update student's gpa" value={updatedGPA} onChange={handleGPAChange} />
               </div>
             </div>
+            <div className="row">
+              <div className="col-md-6">
+                <label htmlFor="campus">Campus</label>
+                  <select name="studentCampus" value={updatedCampus} onChange={handleCampusChange} className="form-control">
+                    {
+                      campuses.map(campus => {
+                        return <option key={ campus.id } value={ campus.id }>{ campus.name }</option>
+                      })
+                    }
+                  </select>
+              </div>
+            </div>
             <div id="button">
               <button type="submit" className="btn btn-primary">Submit Updates</button>
             </div>
@@ -67,10 +76,12 @@ class SingleStudent extends Component {
 const mapStateToProps = function (state, ownProps) {
   return {
     student: state.student,
+    campuses: state.campuses,
     updatedFirstName: state.updatedStudentFirstName,
     updatedLastName: state.updatedStudentLastName,
     updatedEmail: state.updatedStudentEmail,
-    updatedGPA: state.updatedStudentGPA
+    updatedGPA: state.updatedStudentGPA,
+    updateCampus: state.updatedStudentCampus
   }
 }
 
@@ -92,14 +103,19 @@ const mapDispatchToProps = function (dispatch, ownProps) {
       const action = updateStudentGPA(event.target.value)
       dispatch(action)
     },
+    handleCampusChange (event) {
+      const action = updateStudentCampus(event.target.value)
+      dispatch(action)
+    },
     handleSubmit (event) {
       event.preventDefault()
       const firstName = event.target.studentFirstName.value
       const lastName = event.target.studentLastName.value
       const email = event.target.studentEmail.value
       const gpa = event.target.studentGPA.value
+      const campusId = event.target.studentCampus.value
       const studentId = ownProps.match.params.studentId
-      const action = updateStudent({ firstName, lastName, email, gpa }, studentId)
+      const action = updateStudent({ firstName, lastName, email, gpa, campusId }, studentId)
       dispatch(action)
       dispatch(updateStudentFirstName(''))
       dispatch(updateStudentLastName(''))

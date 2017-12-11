@@ -1,7 +1,7 @@
 /* combineReducers is not currently used, but eventually should be for modular code :D */
 import { combineReducers } from 'redux'
 
-// initial state
+// *** initial state
 const initialState = {
   campuses: [],
   campus: {},
@@ -16,13 +16,15 @@ const initialState = {
   newStudentLastName: '',
   newStudentEmail: '',
   newStudentGPA: '',
+  newStudentCampus: '',
   updatedStudentFirstName: '',
   updatedStudentLastName: '',
   updatedStudentEmail: '',
-  updatedStudentGPA: ''
+  updatedStudentGPA: '',
+  updatedStudentCampus: ''
 }
 
-// actions
+// list of actions
 const GET_CAMPUSES = 'GET_CAMPUSES'
 const GET_CAMPUS = 'GET_CAMPUS'
 const GET_STUDENTS_AT_CAMPUS = 'GET_STUDENTS_AT_CAMPUS'
@@ -39,10 +41,12 @@ const WRITE_STUDENT_FIRSTNAME = 'WRITE_STUDENT_FIRSTNAME'
 const WRITE_STUDENT_LASTNAME = 'WRITE_STUDENT_LASTNAME'
 const WRITE_STUDENT_EMAIL = 'WRITE_STUDENT_EMAIL'
 const WRITE_STUDENT_GPA = 'WRITE_STUDENT_GPA'
+const WRITE_STUDENT_CAMPUS = 'WRITE_STUDENT_CAMPUS'
 const UPDATE_STUDENT_FIRSTNAME = 'UPDATE_STUDENT_FIRSTNAME'
 const UPDATE_STUDENT_LASTNAME = 'UPDATE_STUDENT_LASTNAME'
 const UPDATE_STUDENT_EMAIL = 'UPDATE_STUDENT_EMAIL'
 const UPDATE_STUDENT_GPA = 'UPDATE_STUDENT_GPA'
+const UPDATE_STUDENT_CAMPUS = 'UPDATE_STUDENT_CAMPUS'
 const CREATE_STUDENT = 'CREATE_STUDENT'
 const EDIT_STUDENT = 'EDIT_STUDENT'
 const DELETE_STUDENT = 'DELETE_STUDENT'
@@ -88,6 +92,7 @@ const rootReducer = function(state = initialState, action) {
       })
     case DELETE_CAMPUS:
       return Object.assign({}, state, {
+        students: [...state.students.filter(student => student.campusId !== action.campus.id)],
         campuses: [...state.campuses.filter(campus => campus.id !== action.campus.id)]
       })
     case GET_STUDENTS:
@@ -114,6 +119,10 @@ const rootReducer = function(state = initialState, action) {
       return Object.assign({}, state, {
         newStudentGPA: action.newStudentGPA
       })
+    case WRITE_STUDENT_CAMPUS:
+      return Object.assign({}, state, {
+        newStudentCampus: action.newStudentCampus
+      })
     case CREATE_STUDENT:
       return Object.assign({}, state, {
         studentsAtCampus: [...state.studentsAtCampus, action.student],
@@ -134,6 +143,10 @@ const rootReducer = function(state = initialState, action) {
     case UPDATE_STUDENT_GPA:
       return Object.assign({}, state, {
         updatedStudentGPA: action.updatedStudentGPA
+      })
+    case UPDATE_STUDENT_CAMPUS:
+      return Object.assign({}, state, {
+        updatedStudentCampus: action.updatedStudentCampus
       })
     case EDIT_STUDENT:
       return Object.assign({}, state, {

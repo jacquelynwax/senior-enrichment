@@ -42,12 +42,24 @@ router.put('/:campusId', (req, res, next) => {
 })
 
 // delete a campus
+// router.delete('/:campusId', (req, res, next) => {
+//   return Campus.destroy({ where: { id: req.params.campusId } })
+//     .then(() => res.json(req.params.campusId))
+//     .catch(next)
+// })
+
 router.delete('/:campusId', (req, res, next) => {
-  return Campus.destroy({ where: { id: req.params.campusId } })
+  Student.findAll({ where: {campusId: req.params.campusId } })
+    .then(students => {
+      Campus.destroy({ where: { id: req.params.campusId } })
+      return students
+    })
+    .then((students) => {
+      students.forEach(student => student.destroy())
+    })
     .then(() => res.json(req.params.campusId))
     .catch(next)
 })
-
 
 
 
